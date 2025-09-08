@@ -141,11 +141,12 @@
     </div>
     <div class="panel">
       <div class="pill">Levels</div>
+      <div class="pill">Total Stress: <span id="totalStress">0.00</span></div>
       <div id="chart" class="chart"></div>
     </div>
   </div>
   <div class="footer">Copyright: SF/SP (Asesoramiento: LM)</div>
-<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   var el = document.getElementById('chart');
@@ -256,7 +257,9 @@ document.addEventListener('DOMContentLoaded', function(){
   function triggerImmediatePreview(){
     const params = readParams();
     const next = computeNext(params);
-    appendPoint(t, next);
+    // Update the last point on the chart instead of appending
+    const update = { x: [[t]], y: [[next.mother], [next.father], [next.son1], [next.son2], [next.son3]] };
+    Plotly.update(chartEl, update, {}, [0,1,2,3,4]);
   }
 
     function initChart(){
