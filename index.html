@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Simulador de Sistema de Estrés Familiar</title>
+<title>Family Stress System Simulator</title>
 <style>
   body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background:#0f1220; color:#f2f4f8; height: 100vh; }
   header { padding: 16px 20px; background: #14172a; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
@@ -65,108 +65,108 @@
 <!-- Existing Code: Redundant style blocks removed -->
 
   <header>
-    <h1>Simulador de Sistema de Estrés Familiar</h1>
+    <h1>Family Stress System Simulator</h1>
   </header>
   <div class="container">
     <div class="panel">
-      <div class="section-title">Controles de Simulación</div>
+      <div class="section-title">Simulation Controls</div>
       <div class="row controls">
-        <button id="play" type="button">Start</button>
+        <button id="play" type="button">Play</button>
         <button id="pause" type="button">Pause</button>
         <button id="step" type="button">Step</button>
         <button id="reset" type="button">Reset</button>
         <button id="zeroVars" type="button">Zero</button>
       </div>
       <div class="row">
-        <label for="speed">Velocidad (ms/paso)</label>
-        <input id="speed" type="range" min="10" max="200" step="5" value="100" title="Velocidad en milisegundos por paso"/>
-        <span id="speedVal" class="small">100</span>
+        <label for="speed">Speed (ms/step)</label>
+        <input id="speed" type="range" min="1" max="200" step="1" value="50" title="Speed in milliseconds per step"/>
+        <span id="speedVal" class="small">50</span>
       </div>
-      <div class="section-title">Tipo de Día</div>
+      <div class="section-title">Day Type</div>
       <div class="row">
         <div class="day-buttons">
           <button id="dayNormal" type="button">Normal</button>
-          <button id="dayCalm" type="button">Día Calmado</button>
-          <button id="dayStormy" type="button">Día Agitado</button>
+          <button id="dayCalm" type="button">Calm Day</button>
+          <button id="dayStormy" type="button">Stormy Day</button>
         </div>
         <div id="dayIndicator" class="day-indicator">Normal</div>
       </div>
       <div class="section-title">External Stress Inflow (0-100)</div>
-      <div class="row"><label for="ext_father">Padre</label><input id="ext_father" type="range" min="0" max="100" step="1" value="50"><span id="ext_father_val" class="small">50</span></div>
-      <div class="row"><label for="ext_mother">Madre</label><input id="ext_mother" type="range" min="0" max="100" step="1" value="30"><span id="ext_mother_val" class="small">30</span></div>
-      <div class="row"><label for="ext_son1">Hijo1</label><input id="ext_son1" type="range" min="0" max="100" step="1" value="30"><span id="ext_son1_val" class="small">30</span></div>
-      <div class="row"><label for="ext_son2">Hijo2</label><input id="ext_son2" type="range" min="0" max="100" step="1" value="25"><span id="ext_son2_val" class="small">25</span></div>
-      <div class="row"><label for="ext_son3">Hijo3</label><input id="ext_son3" type="range" min="0" max="100" step="1" value="5"><span id="ext_son3_val" class="small">5</span></div>
+      <div class="row"><label for="ext_father">Father</label><input id="ext_father" type="range" min="0" max="100" step="1" value="50"><span id="ext_father_val" class="small">50</span></div>
+      <div class="row"><label for="ext_mother">Mother</label><input id="ext_mother" type="range" min="0" max="100" step="1" value="30"><span id="ext_mother_val" class="small">30</span></div>
+      <div class="row"><label for="ext_son1">Son1</label><input id="ext_son1" type="range" min="0" max="100" step="1" value="30"><span id="ext_son1_val" class="small">30</span></div>
+      <div class="row"><label for="ext_son2">Son2</label><input id="ext_son2" type="range" min="0" max="100" step="1" value="25"><span id="ext_son2_val" class="small">25</span></div>
+      <div class="row"><label for="ext_son3">Son3</label><input id="ext_son3" type="range" min="0" max="100" step="1" value="5"><span id="ext_son3_val" class="small">5</span></div>
       <div class="section-title">Healthy Coping Outflow (0-100)</div>
-      <div class="row"><label for="cop_father">Padre</label><input id="cop_father" type="range" min="0" max="100" step="1" value="0"><span id="cop_father_val" class="small">0</span></div>
-      <div class="row"><label for="cop_mother">Madre</label><input id="cop_mother" type="range" min="0" max="100" step="1" value="30"><span id="cop_mother_val" class="small">30</span></div>
-      <div class="row"><label for="cop_son1">Hijo1</label><input id="cop_son1" type="range" min="0" max="100" step="1" value="10"><span id="cop_son1_val" class="small">10</span></div>
-      <div class="row"><label for="cop_son2">Hijo2</label><input id="cop_son2" type="range" min="0" max="100" step="1" value="40"><span id="cop_son2_val" class="small">40</span></div>
-      <div class="row"><label for="cop_son3">Hijo3</label><input id="cop_son3" type="range" min="0" max="100" step="1" value="30"><span id="cop_son3_val" class="small">30</span></div>
-      <div class="section-title">Interconexiones (0-100%)</div>
-      <div class="section-title" style="font-size: 11px; margin: 8px 0 4px;">Conexiones del Padre</div>
-      <div class="row"><label for="w_father_mother">Padre → Madre</label><input id="w_father_mother" type="range" min="0" max="100" step="1" value="60"><span id="w_father_mother_val" class="small">60</span></div>
-      <div class="row"><label for="w_father_son1">Padre → Hijo1</label><input id="w_father_son1" type="range" min="0" max="100" step="1" value="20"><span id="w_father_son1_val" class="small">20</span></div>
-      <div class="row"><label for="w_father_son2">Padre → Hijo2</label><input id="w_father_son2" type="range" min="0" max="100" step="1" value="10"><span id="w_father_son2_val" class="small">10</span></div>
-      <div class="row"><label for="w_father_son3">Padre → Hijo3</label><input id="w_father_son3" type="range" min="0" max="100" step="1" value="40"><span id="w_father_son3_val" class="small">40</span></div>
-      <div class="section-title" style="font-size: 11px; margin: 8px 0 4px;">Conexiones de la Madre</div>
-      <div class="row"><label for="w_mother_father">Madre → Padre</label><input id="w_mother_father" type="range" min="0" max="100" step="1" value="50"><span id="w_mother_father_val" class="small">50</span></div>
-      <div class="row"><label for="w_mother_son1">Madre → Hijo1</label><input id="w_mother_son1" type="range" min="0" max="100" step="1" value="50"><span id="w_mother_son1_val" class="small">50</span></div>
-      <div class="row"><label for="w_mother_son2">Madre → Hijo2</label><input id="w_mother_son2" type="range" min="0" max="100" step="1" value="20"><span id="w_mother_son2_val" class="small">20</span></div>
-      <div class="row"><label for="w_mother_son3">Madre → Hijo3</label><input id="w_mother_son3" type="range" min="0" max="100" step="1" value="20"><span id="w_mother_son3_val" class="small">20</span></div>
-      <div class="section-title" style="font-size: 11px; margin: 8px 0 4px;">Conexiones de los Hijos</div>
-      <div class="row"><label for="w_son1_father">Hijo1 → Padre</label><input id="w_son1_father" type="range" min="0" max="100" step="1" value="10"><span id="w_son1_father_val" class="small">10</span></div>
-      <div class="row"><label for="w_son1_mother">Hijo1 → Madre</label><input id="w_son1_mother" type="range" min="0" max="100" step="1" value="30"><span id="w_son1_mother_val" class="small">30</span></div>
-      <div class="row"><label for="w_son1_son2">Hijo1 → Hijo2</label><input id="w_son1_son2" type="range" min="0" max="100" step="1" value="0"><span id="w_son1_son2_val" class="small">0</span></div>
-      <div class="row"><label for="w_son1_son3">Hijo1 → Hijo3</label><input id="w_son1_son3" type="range" min="0" max="100" step="1" value="40"><span id="w_son1_son3_val" class="small">40</span></div>
-      <div class="row"><label for="w_son2_father">Hijo2 → Padre</label><input id="w_son2_father" type="range" min="0" max="100" step="1" value="10"><span id="w_son2_father_val" class="small">10</span></div>
-      <div class="row"><label for="w_son2_mother">Hijo2 → Madre</label><input id="w_son2_mother" type="range" min="0" max="100" step="1" value="10"><span id="w_son2_mother_val" class="small">10</span></div>
-      <div class="row"><label for="w_son2_son1">Hijo2 → Hijo1</label><input id="w_son2_son1" type="range" min="0" max="100" step="1" value="0"><span id="w_son2_son1_val" class="small">0</span></div>
-      <div class="row"><label for="w_son2_son3">Hijo2 → Hijo3</label><input id="w_son2_son3" type="range" min="0" max="100" step="1" value="5"><span id="w_son2_son3_val" class="small">5</span></div>
-      <div class="row"><label for="w_son3_father">Hijo3 → Padre</label><input id="w_son3_father" type="range" min="0" max="100" step="1" value="5"><span id="w_son3_father_val" class="small">5</span></div>
-      <div class="row"><label for="w_son3_mother">Hijo3 → Madre</label><input id="w_son3_mother" type="range" min="0" max="100" step="1" value="20"><span id="w_son3_mother_val" class="small">20</span></div>
-      <div class="row"><label for="w_son3_son1">Hijo3 → Hijo1</label><input id="w_son3_son1" type="range" min="0" max="100" step="1" value="30"><span id="w_son3_son1_val" class="small">30</span></div>
-      <div class="row"><label for="w_son3_son2">Hijo3 → Hijo2</label><input id="w_son3_son2" type="range" min="0" max="100" step="1" value="10"><span id="w_son3_son2_val" class="small">10</span></div>
-      <div class="section-title">Dimensiones del Tanque</div>
-  <div class="row"><label for="father_width">Ancho (Padre)</label><input id="father_width" type="range" min="1" max="99" step="1" value="70"><span id="father_width_val" class="small">70</span></div>
-  <div class="row"><label for="father_height">Altura (Padre)</label><input id="father_height" type="range" min="1" max="99" step="1" value="30"><span id="father_height_readout" class="small">30</span></div>
-  <div class="row"><label for="mother_width">Ancho (Madre)</label><input id="mother_width" type="range" min="1" max="99" step="1" value="30"><span id="mother_width_val" class="small">30</span></div>
-  <div class="row"><label for="mother_height">Altura (Madre)</label><input id="mother_height" type="range" min="1" max="99" step="1" value="70"><span id="mother_height_readout" class="small">70</span></div>
-  <div class="row"><label for="son1_width">Ancho (Hijo1)</label><input id="son1_width" type="range" min="1" max="99" step="1" value="80"><span id="son1_width_val" class="small">80</span></div>
-  <div class="row"><label for="son1_height">Altura (Hijo1)</label><input id="son1_height" type="range" min="1" max="99" step="1" value="20"><span id="son1_height_readout" class="small">20</span></div>
-  <div class="row"><label for="son2_width">Ancho (Hijo2)</label><input id="son2_width" type="range" min="1" max="99" step="1" value="50"><span id="son2_width_val" class="small">50</span></div>
-  <div class="row"><label for="son2_height">Altura (Hijo2)</label><input id="son2_height" type="range" min="1" max="99" step="1" value="50"><span id="son2_height_readout" class="small">50</span></div>
-  <div class="row"><label for="son3_width">Ancho (Hijo3)</label><input id="son3_width" type="range" min="1" max="99" step="1" value="30"><span id="son3_width_val" class="small">30</span></div>
-  <div class="row"><label for="son3_height">Altura (Hijo3)</label><input id="son3_height" type="range" min="1" max="99" step="1" value="70"><span id="son3_height_readout" class="small">70</span></div>
+      <div class="row"><label for="cop_father">Father</label><input id="cop_father" type="range" min="0" max="100" step="1" value="0"><span id="cop_father_val" class="small">0</span></div>
+      <div class="row"><label for="cop_mother">Mother</label><input id="cop_mother" type="range" min="0" max="100" step="1" value="30"><span id="cop_mother_val" class="small">30</span></div>
+      <div class="row"><label for="cop_son1">Son1</label><input id="cop_son1" type="range" min="0" max="100" step="1" value="10"><span id="cop_son1_val" class="small">10</span></div>
+      <div class="row"><label for="cop_son2">Son2</label><input id="cop_son2" type="range" min="0" max="100" step="1" value="40"><span id="cop_son2_val" class="small">40</span></div>
+      <div class="row"><label for="cop_son3">Son3</label><input id="cop_son3" type="range" min="0" max="100" step="1" value="30"><span id="cop_son3_val" class="small">30</span></div>
+      <div class="section-title">Interconnections (0-100%)</div>
+      <div class="section-title" style="font-size: 11px; margin: 8px 0 4px;">Father Connections</div>
+      <div class="row"><label for="w_father_mother">Father → Mother</label><input id="w_father_mother" type="range" min="0" max="100" step="1" value="60"><span id="w_father_mother_val" class="small">60</span></div>
+      <div class="row"><label for="w_father_son1">Father → Son1</label><input id="w_father_son1" type="range" min="0" max="100" step="1" value="20"><span id="w_father_son1_val" class="small">20</span></div>
+      <div class="row"><label for="w_father_son2">Father → Son2</label><input id="w_father_son2" type="range" min="0" max="100" step="1" value="10"><span id="w_father_son2_val" class="small">10</span></div>
+      <div class="row"><label for="w_father_son3">Father → Son3</label><input id="w_father_son3" type="range" min="0" max="100" step="1" value="40"><span id="w_father_son3_val" class="small">40</span></div>
+      <div class="section-title" style="font-size: 11px; margin: 8px 0 4px;">Mother Connections</div>
+      <div class="row"><label for="w_mother_father">Mother → Father</label><input id="w_mother_father" type="range" min="0" max="100" step="1" value="50"><span id="w_mother_father_val" class="small">50</span></div>
+      <div class="row"><label for="w_mother_son1">Mother → Son1</label><input id="w_mother_son1" type="range" min="0" max="100" step="1" value="50"><span id="w_mother_son1_val" class="small">50</span></div>
+      <div class="row"><label for="w_mother_son2">Mother → Son2</label><input id="w_mother_son2" type="range" min="0" max="100" step="1" value="20"><span id="w_mother_son2_val" class="small">20</span></div>
+      <div class="row"><label for="w_mother_son3">Mother → Son3</label><input id="w_mother_son3" type="range" min="0" max="100" step="1" value="20"><span id="w_mother_son3_val" class="small">20</span></div>
+      <div class="section-title" style="font-size: 11px; margin: 8px 0 4px;">Sons Connections</div>
+      <div class="row"><label for="w_son1_father">Son1 → Father</label><input id="w_son1_father" type="range" min="0" max="100" step="1" value="10"><span id="w_son1_father_val" class="small">10</span></div>
+      <div class="row"><label for="w_son1_mother">Son1 → Mother</label><input id="w_son1_mother" type="range" min="0" max="100" step="1" value="30"><span id="w_son1_mother_val" class="small">30</span></div>
+      <div class="row"><label for="w_son1_son2">Son1 → Son2</label><input id="w_son1_son2" type="range" min="0" max="100" step="1" value="0"><span id="w_son1_son2_val" class="small">0</span></div>
+      <div class="row"><label for="w_son1_son3">Son1 → Son3</label><input id="w_son1_son3" type="range" min="0" max="100" step="1" value="40"><span id="w_son1_son3_val" class="small">40</span></div>
+      <div class="row"><label for="w_son2_father">Son2 → Father</label><input id="w_son2_father" type="range" min="0" max="100" step="1" value="10"><span id="w_son2_father_val" class="small">10</span></div>
+      <div class="row"><label for="w_son2_mother">Son2 → Mother</label><input id="w_son2_mother" type="range" min="0" max="100" step="1" value="10"><span id="w_son2_mother_val" class="small">10</span></div>
+      <div class="row"><label for="w_son2_son1">Son2 → Son1</label><input id="w_son2_son1" type="range" min="0" max="100" step="1" value="0"><span id="w_son2_son1_val" class="small">0</span></div>
+      <div class="row"><label for="w_son2_son3">Son2 → Son3</label><input id="w_son2_son3" type="range" min="0" max="100" step="1" value="5"><span id="w_son2_son3_val" class="small">5</span></div>
+      <div class="row"><label for="w_son3_father">Son3 → Father</label><input id="w_son3_father" type="range" min="0" max="100" step="1" value="5"><span id="w_son3_father_val" class="small">5</span></div>
+      <div class="row"><label for="w_son3_mother">Son3 → Mother</label><input id="w_son3_mother" type="range" min="0" max="100" step="1" value="20"><span id="w_son3_mother_val" class="small">20</span></div>
+      <div class="row"><label for="w_son3_son1">Son3 → Son1</label><input id="w_son3_son1" type="range" min="0" max="100" step="1" value="30"><span id="w_son3_son1_val" class="small">30</span></div>
+      <div class="row"><label for="w_son3_son2">Son3 → Son2</label><input id="w_son3_son2" type="range" min="0" max="100" step="1" value="10"><span id="w_son3_son2_val" class="small">10</span></div>
+      <div class="section-title">Tank Dimensions</div>
+  <div class="row"><label for="father_width">Father Width</label><input id="father_width" type="range" min="1" max="99" step="1" value="70"><span id="father_width_val" class="small">70</span></div>
+  <div class="row"><label for="father_height">Father Height</label><input id="father_height" type="range" min="1" max="99" step="1" value="30"><span id="father_height_readout" class="small">30</span></div>
+  <div class="row"><label for="mother_width">Mother Width</label><input id="mother_width" type="range" min="1" max="99" step="1" value="30"><span id="mother_width_val" class="small">30</span></div>
+  <div class="row"><label for="mother_height">Mother Height</label><input id="mother_height" type="range" min="1" max="99" step="1" value="70"><span id="mother_height_readout" class="small">70</span></div>
+  <div class="row"><label for="son1_width">Son1 Width</label><input id="son1_width" type="range" min="1" max="99" step="1" value="80"><span id="son1_width_val" class="small">80</span></div>
+  <div class="row"><label for="son1_height">Son1 Height</label><input id="son1_height" type="range" min="1" max="99" step="1" value="20"><span id="son1_height_readout" class="small">20</span></div>
+  <div class="row"><label for="son2_width">Son2 Width</label><input id="son2_width" type="range" min="1" max="99" step="1" value="50"><span id="son2_width_val" class="small">50</span></div>
+  <div class="row"><label for="son2_height">Son2 Height</label><input id="son2_height" type="range" min="1" max="99" step="1" value="50"><span id="son2_height_readout" class="small">50</span></div>
+  <div class="row"><label for="son3_width">Son3 Width</label><input id="son3_width" type="range" min="1" max="99" step="1" value="30"><span id="son3_width_val" class="small">30</span></div>
+  <div class="row"><label for="son3_height">Son3 Height</label><input id="son3_height" type="range" min="1" max="99" step="1" value="70"><span id="son3_height_readout" class="small">70</span></div>
     </div>
     <div class="panel">
-      <div class="pill">Niveles</div>
+      <div class="pill">Levels</div>
       <div id="chart" class="chart"></div>
     </div>
   </div>
-  <div class="footer">Copyright: Servando Fernandez/Stefania Patín (Asesoramiento: Liz Maya)</span></div>
+  <div class="footer">Copyright: SF/SP (Asesoramiento: LM)</div>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   var el = document.getElementById('chart');
   if(!el){
-    console.error('contenedor del gráfico no encontrado');
+    console.error('chart container not found');
     return;
   }
 (function(){
   const chartEl = el;
   const byId = function(id){ return document.getElementById(id); };
 
-  // Estado
+  // State
   let t = 0;
   let playing = false;
   let timer = null;
-  let levels = { mother: 20, father: 20, son1: 20, son2: 20, son3: 20 };  // Comenzar en 20 para crecimiento curvo de ejemplo
+  let levels = { mother: 20, father: 20, son1: 20, son2: 20, son3: 20 };  // Start at 20 for curved growth example
   const capacity = { mother: 100, father: 100, son1: 100, son2: 100, son3: 100 };
   let dayType = 'normal';
-  let dayEffectTicks = 0; // Contador para efecto temporal del día
+  let dayEffectTicks = 0; // Counter for temporary day effect
   const dayMods = { normal: 1.0, calm: 0.5, stormy: 1.5 };
-  const effectDuration = 60; // Ticks para efecto temporal, aumentado a 3x (de 20 a 60)
+  const effectDuration = 60; // Ticks for temporary effect, increased for longer duration
 
   function readNumber(id, def){
     const el = byId(id); if(!el) return def; const v = parseFloat(el.value); return isNaN(v) ? def : v;
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     const next = {};
     let totalStress = 0;
-    const alpha = 0.05; // Factor de suavizado para curvas más suaves
+    const alpha = 0.05; // Smoothing factor for smoother curves
     ['mother','father','son1','son2','son3'].forEach(function(p){
       let stress_p = individual[p] * (1 + params.height[p] / params.width[p]);
       Object.keys(params.w).forEach(function(q){
@@ -221,8 +221,8 @@ document.addEventListener('DOMContentLoaded', function(){
           stress_p += individual[q] * params.w[q][p];
         }
       });
-      // Crecimiento curvo: aproximarse al objetivo stress_p con tasa basada en altura/ancho (invertido para aumento más lento cuando ancho > altura)
-      const rate = params.height[p] / params.width[p];
+      // Curved growth: approach target stress_p with rate based on width/height, smoothed
+      const rate = params.height[p] / params.width[p];  // Inverted: higher width now means lower rate (slower change)
       next[p] = Math.max(0, Math.min(capacity[p], levels[p] + (stress_p - levels[p]) * rate * alpha));
       totalStress += stress_p;
     });
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function appendPoint(tt, vals){
     const update = { x: [], y: [] };
-    ['mother','father','son1','son2','son3'].forEach(function(p){ update.x.push([tt]); update.y.push([vals[p]]); }); // eje x en pasos
+    ['mother','father','son1','son2','son3'].forEach(function(p){ update.x.push([tt]); update.y.push([vals[p]]); }); // x-axis in steps
     Plotly.extendTraces(chartEl, update, [0,1,2,3,4], 500);
   }
 
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function(){
     levels = next;
     t = t + 1;
     appendPoint(t, levels);
-    // Manejar efecto temporal del día
+    // Handle temporary day effect
     if (dayEffectTicks > 0) {
       dayEffectTicks--;
       if (dayEffectTicks === 0) {
@@ -262,50 +262,50 @@ document.addEventListener('DOMContentLoaded', function(){
     function initChart(){
       try {
         const traces = [
-          { x: [0], y: [20], mode: 'lines+markers', name: 'Madre', line: {color: 'red'} },  // Comenzar en 20
-          { x: [0], y: [20], mode: 'lines+markers', name: 'Padre', line: {color: 'blue'} },
-          { x: [0], y: [20], mode: 'lines+markers', name: 'Hijo 1', line: {color: 'green'} },
-          { x: [0], y: [20], mode: 'lines+markers', name: 'Hijo 2', line: {color: 'orange'} },
-          { x: [0], y: [20], mode: 'lines+markers', name: 'Hijo 3', line: {color: 'purple'} }
+          { x: [0], y: [20], mode: 'lines+markers', name: 'Mother', line: {color: 'red'} },  // Start at 20
+          { x: [0], y: [20], mode: 'lines+markers', name: 'Father', line: {color: 'blue'} },
+          { x: [0], y: [20], mode: 'lines+markers', name: 'Son 1', line: {color: 'green'} },
+          { x: [0], y: [20], mode: 'lines+markers', name: 'Son 2', line: {color: 'orange'} },
+          { x: [0], y: [20], mode: 'lines+markers', name: 'Son 3', line: {color: 'purple'} }
         ];
         const layout = { 
-          title: 'Niveles de Estrés', 
+          title: 'Stress Levels', 
           showlegend: true, 
           paper_bgcolor: 'rgba(0,0,0,0)', 
           plot_bgcolor: 'rgba(0,0,0,0)',
-          yaxis: { range: [0, 100] }  // Fijar eje y a 0-100
+          yaxis: { range: [0, 100] }  // Fix y-axis to 0-100
         };
         Plotly.newPlot(chartEl, traces, layout, { displayModeBar: false });
       } catch (e) {
-        console.error('initChart falló', e);
+        console.error('initChart failed', e);
       }
     }  function start(){ if(playing) return; playing = true; const speed = readNumber('speed', 100); timer = setInterval(stepOnce, speed); }
   function pause(){ playing = false; if(timer){ clearInterval(timer); timer = null; } }
   function reset(){ pause(); t = 0; levels = { mother:20, father:20, son1:20, son2:20, son3:20 }; dayType = 'normal'; dayEffectTicks = 0; Plotly.purge(chartEl); initChart(); updateHeightReadouts(); updateDayIndicator(); updateDayButtons(); updateReadouts(); triggerImmediatePreview(); }
 
   function zeroVariables(){
-    // Establecer todos los deslizadores a 0 excepto ancho/altura (dimensiones del tanque) y velocidad
+    // Set all sliders to 0 except width/height (tank dimensions) and speed
     document.querySelectorAll('input[type=range]').forEach(el => {
       if (!el.id.includes('width') && !el.id.includes('height') && el.id !== 'speed') {
         el.value = 0;
       }
     });
-    // Establecer niveles a 0
+    // Set levels to 0
     levels = { mother: 0, father: 0, son1: 0, son2: 0, son3: 0 };
-    // Actualizar lecturas de altura y lecturas
+    // Update readouts and height readouts
     updateHeightReadouts();
     updateReadouts();
-    // Reiniciar gráfico con 0s
+    // Reinit chart with 0s
     Plotly.purge(chartEl);
     const traces = [
-      { x: [t], y: [0], mode: 'lines+markers', name: 'Madre', line: {color: 'red'} },
-      { x: [t], y: [0], mode: 'lines+markers', name: 'Padre', line: {color: 'blue'} },
-      { x: [t], y: [0], mode: 'lines+markers', name: 'Hijo 1', line: {color: 'green'} },
-      { x: [t], y: [0], mode: 'lines+markers', name: 'Hijo 2', line: {color: 'orange'} },
-      { x: [t], y: [0], mode: 'lines+markers', name: 'Hijo 3', line: {color: 'purple'} }
+      { x: [t], y: [0], mode: 'lines+markers', name: 'Mother', line: {color: 'red'} },
+      { x: [t], y: [0], mode: 'lines+markers', name: 'Father', line: {color: 'blue'} },
+      { x: [t], y: [0], mode: 'lines+markers', name: 'Son 1', line: {color: 'green'} },
+      { x: [t], y: [0], mode: 'lines+markers', name: 'Son 2', line: {color: 'orange'} },
+      { x: [t], y: [0], mode: 'lines+markers', name: 'Son 3', line: {color: 'purple'} }
     ];
     const layout = { 
-      title: 'Niveles de Estrés', 
+      title: 'Stress Levels', 
       showlegend: true, 
       paper_bgcolor: 'rgba(0,0,0,0)', 
       plot_bgcolor: 'rgba(0,0,0,0)',
@@ -323,14 +323,14 @@ document.addEventListener('DOMContentLoaded', function(){
       if(wEl){
         const w = Math.max(1, parseFloat(wEl.value || '1'));
         const h = 100 - w;
-        if(span){ span.textContent = h; } // Eliminar decimales finales
+        if(span){ span.textContent = h; } // Remove trailing decimals
         if(hEl){ hEl.value = h; }
       }
     });
   }
 
   function updateReadouts(){
-    // Velocidad
+    // Speed
     byId('speedVal').textContent = readNumber('speed', 100);
     // Ext
     ['father','mother','son1','son2','son3'].forEach(p => {
@@ -344,10 +344,10 @@ document.addEventListener('DOMContentLoaded', function(){
     const wIds = ['w_father_mother', 'w_mother_father', 'w_father_son1', 'w_father_son2', 'w_father_son3', 'w_mother_son1', 'w_mother_son2', 'w_mother_son3', 'w_son1_father', 'w_son1_mother', 'w_son1_son2', 'w_son1_son3', 'w_son2_father', 'w_son2_mother', 'w_son2_son1', 'w_son2_son3', 'w_son3_father', 'w_son3_mother', 'w_son3_son1', 'w_son3_son2'];
     wIds.forEach(id => {
       const val = readNumber(id, 0);
-      byId(id + '_val').textContent = val; // Eliminar % de la pantalla estática
-      byId(id).title = val + '%'; // Información sobre herramientas dinámica al pasar el mouse/mover
+      byId(id + '_val').textContent = val; // Remove % from static display
+      byId(id).title = val + '%'; // Dynamic tooltip on hover/move
     });
-    // Ancho
+    // Width
     ['father','mother','son1','son2','son3'].forEach(p => {
       byId(p + '_width_val').textContent = readNumber(p + '_width', 1);
     });
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const indicator = byId('dayIndicator');
     if (!indicator) return;
     if (dayEffectTicks > 0) {
-      indicator.textContent = `${dayType.charAt(0).toUpperCase() + dayType.slice(1)} (Activo)`;
+      indicator.textContent = `${dayType.charAt(0).toUpperCase() + dayType.slice(1)} (Active)`;
       indicator.className = 'day-indicator day-active';
     } else {
       indicator.textContent = 'Normal';
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function(){
     byId('dayStormy').classList.toggle('active', dayType === 'stormy');
   }
 
-  // Conectar controles
+  // Wire controls
   if(byId('play')) byId('play').addEventListener('click', start);
   if(byId('pause')) byId('pause').addEventListener('click', pause);
   if(byId('step')) byId('step').addEventListener('click', stepOnce);
@@ -399,19 +399,19 @@ document.addEventListener('DOMContentLoaded', function(){
     triggerImmediatePreview();
   });
 
-  // Cualquier entrada de rango activa vista previa inmediata
+  // Any range input triggers immediate preview
   document.querySelectorAll('input[type=range]').forEach(function(el){
     el.addEventListener('input', function(){ updateHeightReadouts(); updateReadouts(); triggerImmediatePreview(); });
     el.addEventListener('change', function(){ updateHeightReadouts(); updateReadouts(); triggerImmediatePreview(); });
   });
 
-  // Inicializar
+  // Initialize
   updateHeightReadouts();
   updateDayIndicator();
   updateDayButtons();
   updateReadouts();
   initChart();
-  // Agregar datos iniciales de simulación para que el gráfico no esté vacío
+  // Add initial simulation data so the graph is not empty
   for(let i=0;i<20;i++) stepOnce();
 })();
 });
